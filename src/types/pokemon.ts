@@ -6,10 +6,8 @@ export type PokemonListResponse = {
 }
 
 export type Pokemon = {
-  id?: number
   name: string
   url: string
-  image?: string
 }
 
 export type PokemonDetail = {
