@@ -71,38 +71,57 @@ export default function Home() {
     <main className={`p-10 ${openSans.className}`}>
       {loading ? (
         <>
-          <p className="grid h-screen w-full place-items-center text-lg font-bold">
+          <p className="grid w-full place-items-center text-lg font-bold">
             データを読み込んでいます...
           </p>
         </>
       ) : (
         <>
+          <div className="join m-auto mb-20 grid max-w-xl grid-cols-2">
+            {prevUrl && (
+              <button
+                className="btn btn-outline join-item"
+                onClick={handlePrevPage}
+              >
+                前へ
+              </button>
+            )}
+            {nextUrl && (
+              <button
+                className="btn btn-outline join-item"
+                onClick={handleNextPage}
+              >
+                次へ
+              </button>
+            )}
+          </div>
+
           <div className="grid grid-cols-8 gap-4">
             {pokemonData.map((pokemon) => (
               <Card key={pokemon.id} pokemon={pokemon} />
             ))}
           </div>
+
+          <div className="join m-auto mb-10 mt-20 grid max-w-xl grid-cols-2">
+            {prevUrl && (
+              <button
+                className="btn btn-outline join-item"
+                onClick={handlePrevPage}
+              >
+                前へ
+              </button>
+            )}
+            {nextUrl && (
+              <button
+                className="btn btn-outline join-item"
+                onClick={handleNextPage}
+              >
+                次へ
+              </button>
+            )}
+          </div>
         </>
       )}
-
-      <div className="join m-auto mb-10 mt-20 grid max-w-xl grid-cols-2">
-        {prevUrl && (
-          <button
-            className="btn btn-outline join-item"
-            onClick={handlePrevPage}
-          >
-            前へ
-          </button>
-        )}
-        {nextUrl && (
-          <button
-            className="btn btn-outline join-item"
-            onClick={handleNextPage}
-          >
-            次へ
-          </button>
-        )}
-      </div>
     </main>
   )
 }
