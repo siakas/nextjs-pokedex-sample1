@@ -21,7 +21,7 @@ const config: Config = {
         fire: '#fe612d',
         water: '#2a91ff',
         grass: '#42bf25',
-        electric: '#ffdb00',
+        electric: '#f8d030',
         psychic: '#ff6380',
         ice: '#43d8ff',
         dragon: '#5462d5',
