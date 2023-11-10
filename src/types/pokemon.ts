@@ -270,6 +270,132 @@ export type Stat = {
 export type Type = {
   slot: number
   type: {
+    name:
+      | 'normal'
+      | 'fighting'
+      | 'flying'
+      | 'poison'
+      | 'ground'
+      | 'rock'
+      | 'bug'
+      | 'ghost'
+      | 'steel'
+      | 'fire'
+      | 'water'
+      | 'grass'
+      | 'electric'
+      | 'psychic'
+      | 'ice'
+      | 'dragon'
+      | 'dark'
+      | 'fairy'
+    url: string
+  }
+}
+
+export type SpeciesDetail = {
+  basebase_happiness: number
+  capture_rate: number
+  color: {
+    name: string
+    url: string
+  }
+  egg_groups: SpeciesDetailEggGroup[]
+  evolution_chain: {
+    url: string
+  }
+  evolves_from_species: {
+    name: string
+    url: string
+  }
+  flavor_text_entries: SpeciesDetailFlavorTextEntries[]
+  form_descriptions: any[]
+  forms_switchable: boolean
+  gender_rate: number
+  genera: SpeciesDetailGenera[]
+  generation: {
+    name: string
+    url: string
+  }
+  growth_rate: {
+    name: string
+    url: string
+  }
+  habitat: {
+    name: string
+    url: string
+  }
+  has_gender_differences: boolean
+  hatch_counter: number
+  id: number
+  is_baby: boolean
+  is_legendary: boolean
+  is_mythical: boolean
+  name: string
+  names: SpeciesDetailNames[]
+  order: number
+  pal_park_encounters: SpeciesDetailPalParkEncounters[]
+  pokedex_numbers: SpeciesDetailPokedexNumbers[]
+  shape: {
+    name: string
+    url: string
+  }
+  varieties: SpeciesDetailVarieties[]
+}
+
+export type SpeciesDetailEggGroup = {
+  name: string
+  url: string
+}
+
+export type SpeciesDetailFlavorTextEntries = {
+  flavor_text: string
+  language: {
+    name: string
+    url: string
+  }
+  version: {
+    name: string
+    url: string
+  }
+}
+
+export type SpeciesDetailGenera = {
+  genus: string
+  language: {
+    name: string
+    url: string
+  }
+}
+
+export type SpeciesDetailNames = {
+  language: {
+    name: string
+    url: string
+  }
+  name: string
+}
+
+export type SpeciesDetailPalParkEncounters = {
+  area: {
+    name: string
+    url: string
+  }
+  base_score: number
+  rate: number
+}
+
+export type SpeciesDetailPokedexNumbers = {
+  entry_number: number
+  pokedex: {
+    name: string
+    url: string
+  }
+}
+
+export type SpeciesDetailVarieties = {
+  is_default: boolean
+  pokemon: {
     name: string
     url: string
   }

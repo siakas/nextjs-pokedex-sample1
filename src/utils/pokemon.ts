@@ -25,27 +25,7 @@ export const getPokemon = async (url: string) => {
   }
 }
 
-export const getPokemonTypes = async (url: string) => {
-  return await new Promise((resolve, reject) => {
-    void fetch(url)
-      .then(async (res) => await res.json())
-      .then((data) => {
-        resolve(data)
-      })
-  })
-}
-
 export const getPokemonAbilites = async (url: string) => {
-  return await new Promise((resolve, reject) => {
-    void fetch(url)
-      .then(async (res) => await res.json())
-      .then((data) => {
-        resolve(data)
-      })
-  })
-}
-
-export const getPokemonName = async (url: string) => {
   return await new Promise((resolve, reject) => {
     void fetch(url)
       .then(async (res) => await res.json())
