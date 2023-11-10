@@ -50,6 +50,6 @@ const config: Config = {
     'bg-dark',
     'bg-fairy',
   ],
-  plugins: [],
+  plugins: [require('daisyui')],
 }
 export default config
