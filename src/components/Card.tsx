@@ -49,7 +49,7 @@ const Card = ({ pokemon }: Props) => {
         {pokemon.types.map((i) => (
           <li
             key={i.slot}
-            className={`rounded px-2 py-1 text-sm font-semibold text-white bg-${i.type.name}`}
+            className={`rounded px-2 py-1 text-xs font-semibold text-white md:text-sm bg-${i.type.name}`}
           >
             {translateType(i.type.name)}
           </li>

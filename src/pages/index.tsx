@@ -20,13 +20,11 @@ export default function Home() {
     const fetchPokemonList = async () => {
       try {
         const res = await getAllPokemon(pokeApiUrl) // ポケモンAPIからデータを取得
-        const detailedPokemonData = await fetchPokemonDetailsInBatches(
-          res.results
-        )
+        const getPokeList = await getPokeBatch(res.results)
 
         // バッチ処理を使って詳細データを取得
-        setPokemonData(detailedPokemonData) // ポケモンのデータを状態にセット
-        setNavigationUrls(res.next, res.previous) // ナビゲーションURLを更新
+        setPokemonData(getPokeList) // ポケモンのデータを状態にセット
+        setNavUrls(res.next, res.previous) // ナビゲーションURLを更新
       } catch (error) {
         console.error('Error fetching Pokémon data:', error) // エラー発生時の処理
       } finally {
@@ -40,25 +38,25 @@ export default function Home() {
   const pokemonCache = new Map() // ポケモンデータのキャッシュを保持するMap
 
   // バッチ処理でポケモンの詳細情報を非同期に取得する関数
-  const fetchPokemonDetailsInBatches = async (pokemonList: Pokemon[]) => {
+  const getPokeBatch = async (pokemonList: Pokemon[]) => {
     const batchSize = 10 // バッチのサイズを定義
     const pokemonChunks = chunk(pokemonList, batchSize) // リストをチャンクに分割
 
-    const detailedPokemonData = await Promise.all(
+    const getPokeList = await Promise.all(
       pokemonChunks.map(async (batch) => {
         const batchData = await Promise.all(
-          batch.map(async (pokemon) => await fetchPokemonDetail(pokemon.url))
+          batch.map(async (pokemon) => await getPokeDetail(pokemon.url))
         )
 
         return batchData
       })
     )
 
-    return detailedPokemonData.flat() // 取得したデータを平坦化して返す
+    return getPokeList.flat() // 取得したデータを平坦化して返す
   }
 
   // ポケモンの詳細情報を取得する関数。キャッシュに存在する場合はそれを使用
-  const fetchPokemonDetail = async (url: string) => {
+  const getPokeDetail = async (url: string) => {
     if (pokemonCache.has(url)) {
       return pokemonCache.get(url) // キャッシュからデータを取得
     }
@@ -70,7 +68,7 @@ export default function Home() {
   }
 
   // 次ページと前ページのナビゲーションURLをセットする関数
-  const setNavigationUrls = (next: string | null, previous: string | null) => {
+  const setNavUrls = (next: string | null, previous: string | null) => {
     setNextUrl(next)
     setPrevUrl(previous)
   }
@@ -82,11 +80,9 @@ export default function Home() {
     setLoading(true) // ローディング状態を開始
     try {
       const res = await getAllPokemon(prevUrl)
-      const detailedPokemonData = await fetchPokemonDetailsInBatches(
-        res.results
-      )
-      setPokemonData(detailedPokemonData)
-      setNavigationUrls(res.next, res.previous)
+      const getPokeList = await getPokeBatch(res.results)
+      setPokemonData(getPokeList)
+      setNavUrls(res.next, res.previous)
     } catch (error) {
       console.error('Error fetching previous page Pokémon data:', error)
     } finally {
@@ -101,11 +97,9 @@ export default function Home() {
     setLoading(true) // ローディング状態を開始
     try {
       const res = await getAllPokemon(nextUrl)
-      const detailedPokemonData = await fetchPokemonDetailsInBatches(
-        res.results
-      )
-      setPokemonData(detailedPokemonData)
-      setNavigationUrls(res.next, res.previous)
+      const getPokeList = await getPokeBatch(res.results)
+      setPokemonData(getPokeList)
+      setNavUrls(res.next, res.previous)
     } catch (error) {
       console.error('Error fetching next page Pokémon data:', error)
     } finally {
@@ -114,7 +108,7 @@ export default function Home() {
   }
 
   return (
-    <main className={`p-10 ${openSans.className}`}>
+    <main className={`p-4 lg:p-10 ${openSans.className}`}>
       {loading ? (
         <>
           <p className="grid w-full place-items-center text-lg font-bold">
@@ -142,7 +136,7 @@ export default function Home() {
             )}
           </div>
 
-          <div className="grid grid-cols-8 gap-4">
+          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-6 xl:gap-4 2xl:grid-cols-8">
             {pokemonData.map((pokemon) => (
               <Card key={pokemon.id} pokemon={pokemon} />
             ))}
