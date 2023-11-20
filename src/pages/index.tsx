@@ -8,7 +8,7 @@ import type { Pokemon, PokemonDetail } from '@/types/pokemon'
 const openSans = Open_Sans({ subsets: ['latin'] })
 
 export default function Home() {
-  const pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=112&offset=0'
+  const pokeApiUrl = 'https://pokeapi.co/api/v2/pokemon?limit=44&offset=0'
   const [loading, setLoading] = useState(true)
   const [pokemonData, setPokemonData] = useState<PokemonDetail[]>([])
   const [nextUrl, setNextUrl] = useState<string | null>('')
@@ -136,7 +136,7 @@ export default function Home() {
             )}
           </div>
 
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-4 xl:grid-cols-6 xl:gap-4 2xl:grid-cols-8">
+          <div className="m-auto grid max-w-5xl grid-cols-2 gap-2 sm:grid-cols-4">
             {pokemonData.map((pokemon) => (
               <Card key={pokemon.id} pokemon={pokemon} />
             ))}
